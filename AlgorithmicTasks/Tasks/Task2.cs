@@ -1,8 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AlgorithmicTasks.Tasks
 {
+    /// <summary>
+    /// Time complexity of the solution: O(n^3 log(n)),
+    /// GroupBy: O(n),
+    /// OrderBy: O(n log(n)),
+    /// Last: IOrderedEnumerable does not implement IList<T> so complexity is O(n)
+    /// </summary>
     public static class Task2
     {
         /// <summary>
@@ -17,15 +24,19 @@ namespace AlgorithmicTasks.Tasks
         /// wtedy funkcja zwraca ten, który wcześniej występuje w kolekcji (ma niższy indeks)</returns>
         public static int Najczestsza(IEnumerable<int> liczby)
         {
-            var valuesOccurences = new Dictionary<int, int>();
-
-            foreach (var number in liczby)
+            if (liczby.Count() != 0)
             {
-                if (valuesOccurences.Keys.Contains(number)) valuesOccurences[number]++;
-                else valuesOccurences[number] = 1;
-            }
+                int topOccurence = liczby.GroupBy(x => x)
+                    .OrderBy(x => x.Count())
+                    .Last().Key;
 
-            return valuesOccurences.FirstOrDefault(x => x.Value == valuesOccurences.Values.Max()).Key;
+                return topOccurence;
+            }
+            else
+            {
+                Console.WriteLine("Input collection cannot be empty");
+                return Int32.MinValue;
+            }
         }
     }
 }

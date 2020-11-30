@@ -9,6 +9,8 @@ namespace AlgorithmicTasks
         {
             Console.WriteLine("Solution by Agnieszka Andrzejczuk");
 
+            // Poniższych wywołań napisanych metod użyłam dla celów testowych
+
             // TASK 1
             var tablica11 = new int[] { 3, 2, 1, 5, 6, 7 };
             var tablica12 = new int[] { 1, 6, 1, 5, 4, 9 };
@@ -84,11 +86,11 @@ namespace AlgorithmicTasks
 
             // TASK 4
             var tablica411 = new string[] { "abc", "def", "ghi"};
-            var tablica412 = new string[] { "aaaa", "def", "ddd"};//   -> zwraca 1, bo tylko "def" występuje
+            var tablica412 = new string[] { "aaaa", "def", "ddd"}; //   -> zwraca 1, bo tylko "def" występuje
             var tablica421 = new string[] { "abc", "def", "def" };
-            var tablica422 = new string[] {"aaaa", "def", "ddd"};// zwraca 2, bo tylko "def" występuje, ale "def" było dwa razy w tablicy pierwsze
+            var tablica422 = new string[] {"aaaa", "def", "ddd"}; // zwraca 2, bo tylko "def" występuje, ale "def" było dwa razy w tablicy pierwsze
             var tablica431 = new string[] { "abc", "def", "ghi" };
-            var tablica432 = new string[] {"abc", "abc", "def", "def", "ghi"};//-> zwraca 2, bo bo znaleziono "def" i "ghi"
+            var tablica432 = new string[] {"abc", "abc", "def", "def", "ghi"}; //-> zwraca 2, bo bo znaleziono "def" i "ghi"; błąd w opisie zadania: powinno zwrócić 3, bo znaleziono "abc", "def" oraz "ghi"
 
             Console.WriteLine("Task 4");
             Console.WriteLine(Task4.IleJestWDrugiejTablicy(tablica411, tablica412));
@@ -96,6 +98,7 @@ namespace AlgorithmicTasks
             Console.WriteLine(Task4.IleJestWDrugiejTablicy(tablica431, tablica432));
 
             // TASK 5
+            // Rozwiązanie znajduje się w projekcie testowym nUnit w tej samej solucji
         }
     }
 }
