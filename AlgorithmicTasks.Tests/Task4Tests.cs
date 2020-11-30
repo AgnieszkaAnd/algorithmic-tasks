@@ -4,17 +4,20 @@ using NUnit.Framework;
 
 namespace AlgorithmicTasks.Tests
 {
-    //Napisz przynajmniej 3 testy jednostkowe do funkcji IleJestWDrugiejTablicy(z poprzedniego pytania).
-    //W tym zadaniu oceniane jest pokrycie ró¿nych przypadków,
-    //a kluczowe jest u¿ycie unikalnych nazw funkcji testowych zgodnie dobrymi praktykami BDD.
-    //A wiêc nazwa funkcji testowej musi mówiæ co jest testowane, jaki przypadek testowy(scenariusz u¿ycia)
-    //jest testowany oraz jaki jest oczekiwany wynik."
+    /// <summary>
+    /// Testy jednostkowe do funkcji IleJestWDrugiejTablicy(z pytania nr 4).
+    /// U¿ywam unikalnych nazw funkcji zgodnie dobrymi praktykami BDD (konwencja Gherkina):
+    /// Given: przypadek testowy(scenariusz u¿ycia)
+    /// And: opcjonalnie
+    /// When: co jest testowane/nazwa metody IleJestWDrugiejTablicy
+    /// Then: oczekiwany wynik)
+    /// </summary>
     public class Task4Tests
     {
         [TestCase(new string[] {"aaa", "bbb"}, new string[] { "c", "d", "eee"})]
         [TestCase(new string[] { "" }, new string[] { "c", "d", "eee" })]
-        [TestCase(new string[] { "aaa", "bbb" }, new string[] { "", "" })]
-
+        [TestCase(new string[] { null }, new string[] { "null" })]
+        [TestCase(new string[] { "aaa", "bbb", "null" }, new string[] { null })]
         public void GivenZeroElementsFromTable1ExistAlsoInTable2_WhenIleJestWDrugiejTablicyIsCalled_ThenShouldReturnZero(
             string[] table1,
             string[] table2)
@@ -22,18 +25,6 @@ namespace AlgorithmicTasks.Tests
             int result = Task4.IleJestWDrugiejTablicy(table1, table2);
 
             Assert.AreEqual(0, result);
-        }
-
-        [TestCase(new string[] { "aaa", "aaa", "bbb" }, new string[] { "aaa", "d", "eee" }, "aaa")]
-        [TestCase(new string[] { "x", "x", "x" }, new string[] { "c", "d", "x", "eee" }, "x")]
-        public void GivenOneElementOccursMultipleTimesInTable1_AndItExistAlsoInTable2_AndNoOtherMatchesFound_WhenIleJestWDrugiejTablicyIsCalled_ThenShouldReturnNumberOfOccurencesOfThatElementInTable1(
-            string[] table1,
-            string[] table2,
-            string matchingElement)
-        {
-            int result = Task4.IleJestWDrugiejTablicy(table1, table2);
-
-            Assert.AreEqual(table1.Count(x => x == matchingElement), result);
         }
 
         [TestCase(new string[] { "aaa", "aaa", "bbb" }, new string[] { "aaaa", "d", "eee" })]
@@ -45,6 +36,20 @@ namespace AlgorithmicTasks.Tests
             int result = Task4.IleJestWDrugiejTablicy(table1, table2);
 
             Assert.AreEqual(0, result);
+        }
+
+        [TestCase(new string[] { "aaa", "aaa", "bbb" }, new string[] { "aaa", "d", "eee" }, "aaa")]
+        [TestCase(new string[] { "x", "x", "x" }, new string[] { "c", "d", "x", "eee" }, "x")]
+        [TestCase(new string[] { null, "hi", null }, new string[] { "c", "d", null, "eee" }, null)]
+
+        public void GivenOneElementOccursMultipleTimesInTable1_AndItExistAlsoInTable2_AndNoOtherMatchesFound_WhenIleJestWDrugiejTablicyIsCalled_ThenShouldReturnNumberOfOccurencesOfThatElementInTable1(
+            string[] table1,
+            string[] table2,
+            string matchingElement)
+        {
+            int result = Task4.IleJestWDrugiejTablicy(table1, table2);
+
+            Assert.AreEqual(table1.Count(x => x == matchingElement), result);
         }
 
         [TestCase(new string[] { "aaa", "aaa", "bbb" }, new string[] { "aaa", "aaa", "bbb" })]
@@ -60,7 +65,7 @@ namespace AlgorithmicTasks.Tests
 
         [TestCase(new string[] { "aaa", "aaa", "bbb" }, new string[] { "bbb", "aaa", "aaa" })]
         [TestCase(new string[] { "x", "xs", "sx" }, new string[] { "sx", "xs", "x" })]
-        public void GivenTable1AndTable2AreInTheOpposite_WhenIleJestWDrugiejTablicyIsCalled_ThenShouldReturnLengthOfTable1(
+        public void GivenTable1AndTable2AreInversedTables_WhenIleJestWDrugiejTablicyIsCalled_ThenShouldReturnLengthOfTable1(
             string[] table1,
             string[] table2)
         {
@@ -68,6 +73,5 @@ namespace AlgorithmicTasks.Tests
 
             Assert.AreEqual(table1.Length, result);
         }
-
     }
 }

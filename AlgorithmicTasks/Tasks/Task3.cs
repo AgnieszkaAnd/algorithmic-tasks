@@ -1,51 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-
-//namespace AlgorithmicTasks.Tasks
-//{
-//    //Napisz funkcję GetHashCode w klasie Punkt:
-//    //public class Punkt
-//    //{
-//    //    private int? _x;
-//    //    private int? _y;
-//    //    public override int GetHashCode()
-//    //    {
-//    //        ....
-//    //    }
-//    //}
-//    public class Task3
-//    {
-//        public class Punkt
-//        {
-//            private int? _x;
-//            private int? _y;
-
-//            public int? X { get; set; }
-//            public int? Y { get; set; }
-
-//            //Guideline: the integer returned by GetHashCode should never change
-//            //Guideline: the implementation of GetHashCode must be extremely fast
-//            //Guideline: the implementation of GetHashCode must be performant
-//            //Guideline: the distribution of hash codes must be “random”
-
-//            //Rule: equal items have equal hashes
-//            //Rule: the integer returned by GetHashCode must never change while the object
-//            //is contained in a data structure that depends on the hash code remaining stable
-//            //Rule: Consumers of GetHashCode cannot rely upon it being stable over time or across appdomains
-//            //Rule: GetHashCode must never throw an exception, and must return
-//            //public override int GetHashCode()
-//            //{
-//            //    if (_x != null && _y != null) return ;
-//            //}
-//        }
-//    }
-//}
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 
 namespace AlgorithmicTasks.Tasks
 {
@@ -64,6 +17,13 @@ namespace AlgorithmicTasks.Tasks
             set => _y = value;
         }
 
+        /// <summary>
+        /// Customowa implementacja metody GetHashCode, zaimplementowana zgodnie z poniższymi zasadami:
+        ///  1. Porównujemy klasy po wartościach properties x i y; instancje z takimi samymi propercjami mają taki sam HashCode
+        ///  2. GetHashCode zawsze zwraca wartość i nie wyrzuca exception
+        ///  3. Implementacja powinna być szybka i rozłożona w sposób losowy
+        /// </summary>
+        /// <returns>Hashcode dla instancji klasy Punkt w typie integer</returns>
         public override int GetHashCode()
         {
             int temp;
