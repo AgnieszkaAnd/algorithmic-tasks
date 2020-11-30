@@ -14,6 +14,28 @@ namespace AlgorithmicTasks.Tests
     /// </summary>
     public class Task4Tests
     {
+        [TestCase(new string[] { }, new string[] { "c", "d", "eee" })]
+        [TestCase(new string[] { }, new string[] { null })]
+        public void GivenEmptyTable1_WhenIleJestWDrugiejTablicyIsCalled_ThenShouldReturnZero(
+            string[] table1,
+            string[] table2)
+        {
+            int result = Task4.IleJestWDrugiejTablicy(table1, table2);
+
+            Assert.AreEqual(0, result);
+        }
+
+        [TestCase(new string[] { "aaa", "bbb" }, new string[] { })]
+        [TestCase(new string[] { null }, new string[] { })]
+        public void GivenEmptyTable2_WhenIleJestWDrugiejTablicyIsCalled_ThenShouldReturnZero(
+            string[] table1,
+            string[] table2)
+        {
+            int result = Task4.IleJestWDrugiejTablicy(table1, table2);
+
+            Assert.AreEqual(0, result);
+        }
+
         [TestCase(new string[] {"aaa", "bbb"}, new string[] { "c", "d", "eee"})]
         [TestCase(new string[] { "" }, new string[] { "c", "d", "eee" })]
         [TestCase(new string[] { null }, new string[] { "null" })]
@@ -28,7 +50,7 @@ namespace AlgorithmicTasks.Tests
         }
 
         [TestCase(new string[] { "aaa", "aaa", "bbb" }, new string[] { "aaaa", "d", "eee" })]
-        [TestCase(new string[] { "x", "x", "x" }, new string[] { "c", "d", "xfhfhfhf", "eee" })]
+        [TestCase(new string[] { "x", "x", "xf" }, new string[] { "c", "d", "xfhfhfhf", "eee" })]
         public void GivenElementFromTable1IsSubstringOfElementInTable2_AndIsNotExactMatch_AndNoOtherMatchesFound_WhenIleJestWDrugiejTablicyIsCalled_ThenShouldReturnZero(
             string[] table1,
             string[] table2)
@@ -52,8 +74,8 @@ namespace AlgorithmicTasks.Tests
             Assert.AreEqual(table1.Count(x => x == matchingElement), result);
         }
 
-        [TestCase(new string[] { "aaa", "aaa", "bbb" }, new string[] { "aaa", "aaa", "bbb" })]
-        [TestCase(new string[] { "x", "xs", "sx" }, new string[] { "x", "xs", "sx" })]
+        [TestCase(new string[] { "aaa", "xssdr", "bbb" }, new string[] { "aaa", "xssdr", "bbb" })]
+        [TestCase(new string[] { null, null }, new string[] { null, null })]
         public void GivenTable1AndTable2AreEqual_WhenIleJestWDrugiejTablicyIsCalled_ThenShouldReturnLengthOfTable1(
             string[] table1,
             string[] table2)
@@ -64,7 +86,7 @@ namespace AlgorithmicTasks.Tests
         }
 
         [TestCase(new string[] { "aaa", "aaa", "bbb" }, new string[] { "bbb", "aaa", "aaa" })]
-        [TestCase(new string[] { "x", "xs", "sx" }, new string[] { "sx", "xs", "x" })]
+        [TestCase(new string[] { "x", "xs", null }, new string[] { null, "xs", "x" })]
         public void GivenTable1AndTable2AreInversedTables_WhenIleJestWDrugiejTablicyIsCalled_ThenShouldReturnLengthOfTable1(
             string[] table1,
             string[] table2)

@@ -5,12 +5,8 @@ using System.Linq;
 namespace AlgorithmicTasks.Tasks
 {
     /// <summary>
-    /// Time complexity of the solution: O(n^2) in the worst case and O(n) in the best case,
-    /// because I have 1 foreach loop: O(n)
-    /// and FirstOrDefault will do comparisons as well n-times in the worst case: O(n) and only 1 time in the best case O(1)
-    ///
-    /// I also considered LINQ, maybe it would have lower space complexity but I think custom solution would have lower time complexity in this case
-    /// Please see previous commit for LINQ solution
+    /// Time complexity of the LINQ solution: O(n^2),
+    /// GroupBy + OrderBy + Last = O(n + n*log(n) + 1) = O(2n log(n) +1) = O(n log(n))
     /// </summary>
     public static class Task2
     {
@@ -28,15 +24,11 @@ namespace AlgorithmicTasks.Tasks
         {
             if (liczby.Count() != 0)
             {
-                var valuesOccurences = new Dictionary<int, int>();
+                int topOccurence = liczby.GroupBy(x => x)
+                    .OrderBy(x => x.Count())
+                    .Last().Key;
 
-                foreach (var number in liczby)
-                {
-                    if (valuesOccurences.Keys.Contains(number)) valuesOccurences[number]++;
-                    else valuesOccurences[number] = 1;
-                }
-
-                return valuesOccurences.FirstOrDefault(x => x.Value == valuesOccurences.Values.Max()).Key;
+                return topOccurence;
             }
             else
             {

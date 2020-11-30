@@ -5,6 +5,11 @@ using System.Text;
 
 namespace AlgorithmicTasks.Tasks
 {
+    /// <summary>
+    /// Time complexity of the solution: O(n)
+    /// Rewrite items of tab2 to HashSet + later iterate over tab1 array: O(n + n) = O(2n) = O(n)
+    /// Contains in Hashset is O(1)
+    /// </summary>
     public static class Task4
     {
         /// <summary>
@@ -21,14 +26,22 @@ namespace AlgorithmicTasks.Tasks
         /// <returns>Liczba elementów tablicy tab1, które znajduja się także w tablicy tab2 w typie integer</returns>
         public static int IleJestWDrugiejTablicy(string[] tab1, string[] tab2)
         {
-            int counter = 0;
-
-            foreach (var item in tab1)
+            if (tab1.Length != 0)
             {
-                if (tab2.Contains(item)) counter++;
-            }
+                var tab2HashSet = new HashSet<string>(tab2);
+                int counter = 0;
 
-            return counter;
+                foreach (var item in tab1)
+                {
+                    if (tab2HashSet.Contains(item)) counter++;
+                }
+
+                return counter;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }
