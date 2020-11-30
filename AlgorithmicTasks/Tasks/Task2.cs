@@ -5,10 +5,12 @@ using System.Linq;
 namespace AlgorithmicTasks.Tasks
 {
     /// <summary>
-    /// Time complexity of the solution: O(n^3 log(n)),
-    /// GroupBy: O(n),
-    /// OrderBy: O(n log(n)),
-    /// Last: IOrderedEnumerable does not implement IList<T> so complexity is O(n)
+    /// Time complexity of the solution: O(n^2) in the worst case and O(n) in the best case,
+    /// because I have 1 foreach loop: O(n)
+    /// and FirstOrDefault will do comparisons as well n-times in the worst case: O(n) and only 1 time in the best case O(1)
+    ///
+    /// I also considered LINQ, maybe it would have lower space complexity but I think custom solution would have lower time complexity in this case
+    /// Please see previous commit for LINQ solution
     /// </summary>
     public static class Task2
     {
@@ -26,11 +28,15 @@ namespace AlgorithmicTasks.Tasks
         {
             if (liczby.Count() != 0)
             {
-                int topOccurence = liczby.GroupBy(x => x)
-                    .OrderBy(x => x.Count())
-                    .Last().Key;
+                var valuesOccurences = new Dictionary<int, int>();
 
-                return topOccurence;
+                foreach (var number in liczby)
+                {
+                    if (valuesOccurences.Keys.Contains(number)) valuesOccurences[number]++;
+                    else valuesOccurences[number] = 1;
+                }
+
+                return valuesOccurences.FirstOrDefault(x => x.Value == valuesOccurences.Values.Max()).Key;
             }
             else
             {
