@@ -5,7 +5,7 @@ using System.Linq;
 namespace AlgorithmicTasks.Tasks
 {
     /// <summary>
-    /// Time complexity of the LINQ solution: O(n^2),
+    /// Time complexity of the LINQ solution: O(n log(n)),
     /// GroupBy + OrderBy + Last = O(n + n*log(n) + 1) = O(2n log(n) +1) = O(n log(n))
     /// </summary>
     public static class Task2
